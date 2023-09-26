@@ -5,7 +5,7 @@ import { View, Text, Button, FlatList, StyleSheet, TouchableOpacity, TextInput }
 import { User } from '../services/interfaces/UserService';
 import { listUserApi } from '../services/user';
 
-const TasksScreen = ({ navigation }) => {
+const TaskScreen = ({ navigation }) => {
 
     const loadTasks = async() => {
         setRefreshing(true)
@@ -35,8 +35,8 @@ const TasksScreen = ({ navigation }) => {
         return (
         <TouchableOpacity onPress={() => goToDetail(item)} style={styles.taskItem}>
             <Text style={styles.taskTitle}>{item.name}</Text>
-            <Text style={styles.content}>{item.mssv}</Text>
-            <Text style={styles.content}>{item.email}</Text>
+            <Text >{item.mssv}</Text>
+            <Text >{item.email}</Text>
         </TouchableOpacity>
         )
     }
@@ -54,7 +54,7 @@ const TasksScreen = ({ navigation }) => {
         <View style={styles.container}>
             <View style ={styles.line}>
                 <Text style={styles.mainTitle}>Danh sách sinh viên</Text>
-                <Text style= {styles.add} onPress={() => navigation.navigate("AddTaskScreen")}>+</Text>
+                <Text style= {styles.add} onPress={() => navigation.navigate("AddUserScreen")}>+</Text>
             </View>
             <View style={styles.line}>
                 <TextInput placeholder='Tìm kiếm theo tên, MSSV hoặc Email'
@@ -64,8 +64,6 @@ const TasksScreen = ({ navigation }) => {
                  />
                 <Text style={styles.btn}onPress={handleSearch}>Tìm kiếm</Text>
             </View>
-            
-            
             <FlatList 
                 data={tasks} 
                 renderItem={(item) => renderTask(item)} 
@@ -78,59 +76,57 @@ const TasksScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        backgroundColor:"white"
     },
     taskItem: {
         backgroundColor: "#fff",
         marginBottom: 2,
-        padding: 10
+        padding: 10,
+        borderBottomWidth: 1,
+        marginHorizontal:10
     },
     taskTitle: {
         fontWeight: "bold",
         marginBottom: 5,
-        fontSize:20
     },
     mainTitle: {
         padding: 18,
         fontWeight: "700",
         fontSize: 22,
-        textAlign:"center"
+        textAlign:"center",
+        width:'90%'
     },
     datetime: {
         alignSelf: "flex-end",
-        fontSize: 18,
         color: "#bbb",
         marginTop: 5
     },
-    content:{
-        fontSize: 20
-    },
+    
     line:{
-        margin:20,
         flexDirection: 'row',
         justifymssv: "space-between",
-        alignItems: 'center', // Đảm bảo các phần tử nằm giữa hàng ngang
-        justifyContent: 'space-between', // Đẩy các phần tử sang hai bên của hàng ngang
-        marginBottom: 5, // Điều chỉnh khoảng cách giữa các dòng
+        alignItems: 'center',
     },
     add:{
-        marginLeft:50,
         fontSize: 40,
+        width:"20%"
     },
     btn:{
         width:"100%", 
-        fontSize:20,
         flex: 1, 
         alignItems: 'flex-end',
-        borderWidth:1,
-        padding:10,
-        textAlign:'center'
-    },textInput:{
-        fontSize:20,
-        padding:10,
-        width: '80%',
-        borderWidth:1
+        borderWidth:2,
+        padding:4,
+        textAlign:'center',
+        margin:10,
+    },
+    textInput:{
+        padding:7,
+        width: '65%',
+        borderWidth:2,
+         margin:10
     }
 })
 
-export default TasksScreen;
+export default TaskScreen;

@@ -36,7 +36,7 @@ const AddUserScreen = ({ navigation }) => {
           }
         try {
             const {data} = await addUserApi(user)
-            navigation.navigate("TasksScreen")
+            navigation.navigate("TaskScreen")
         } catch(err) {
             const message = err.response
             alert(message)
@@ -54,7 +54,7 @@ const AddUserScreen = ({ navigation }) => {
             {
               text: "Đồng ý",
               onPress: () => {
-                navigation.navigate("TasksScreen");
+                navigation.navigate("TaskScreen");
               },
             },
           ]
@@ -62,7 +62,7 @@ const AddUserScreen = ({ navigation }) => {
       };
     return (
         <View style={styles.container}>
-            <Text style={styles.mainText}>Thêm sinh viên</Text>
+            <Text style={styles.mainText}>Thêm mới sinh viên</Text>
             <View style={styles.address}>
             <Text style={styles.label}>Tên sinh viên</Text>
             <TextInput value={user.name}  onChangeText={(value) => {
@@ -93,17 +93,17 @@ const AddUserScreen = ({ navigation }) => {
                 })
             }}  style={styles.input} />
             <Text style={styles.label}>Địa chỉ</Text>
-            <TextInput value={user.address} numberOfLines={10} onChangeText={(value) => {
+            <TextInput value={user.address}  onChangeText={(value) => {
                 setUser({
                     ...user,
                     address: value
                 })
-            }}  style={styles.input} />
+            }}  style={styles.inputAdd} multiline={true}  numberOfLines={10}/>
             <View style={styles.buttons}>
-            <TouchableOpacity style={styles.button} onPress={onCancel}>
-                <Text>Hủy bỏ</Text>
+            <TouchableOpacity onPress={onCancel}>
+                <Text style={styles.cancel}>Hủy bỏ</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button}onPress={addUserAction}>
+            <TouchableOpacity style={styles.buttonSave}onPress={addUserAction}>
                 <Text>Lưu lại</Text>
             </TouchableOpacity>
             </View>
@@ -120,25 +120,21 @@ const styles = StyleSheet.create({
         padding: 20
     },
     mainText: {
-        marginTop: 20,
-        fontSize: 25,
-        fontWeight: "900"
+        fontSize: 20,
+        fontWeight: "bold"
     },
     address: {
         alignItems: "flex-start",
-        width: "100%"
+        width: "100%",
+        height: 100
     },
     input: {
-        borderWidth: 1,
-        borderColor: "#bbb",
+        borderWidth: 2,
         padding: 5,
-        borderRadius: 5,
         width: "100%",
-        fontSize: 20
     },
     label: {
         marginVertical: 10,
-        fontSize: 20
     },
     buttons: {
         flexDirection: "row",
@@ -147,10 +143,22 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
     button: {
-        padding: 15,
-        borderRadius: 5,
-        width: "15%",
-        alignItems: "center"
+        alignItems: "center",
+    },
+    buttonSave:{
+        borderBottomWidth:4,
+        borderRightWidth:4,
+        borderWidth:1
+    },
+    cancel:{
+        textDecorationLine:'underline',
+        color:'blue'
+    },
+    inputAdd:{
+        borderWidth:2,
+        height:100,
+        width:'100%',
+        
     }
 })
 
